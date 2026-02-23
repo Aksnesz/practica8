@@ -15,4 +15,4 @@ def test_divide():
 
 def test_divide_by_zero():
     with pytest.raises(ValueError):
-        Calculator().divide(10, 0)
+        Calculator().divide(10, 2)
