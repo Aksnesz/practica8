@@ -6,14 +6,22 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Configurar Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
-    - name: Instalar dependencias
-      run: |
-        python -m pip install --upgrade pip
-        pip install pytest
-    - name: Ejecutar pruebas
-      run: pytest test.py -v
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest ruff
+
+      - name: Ejecutar pruebas
+        run: pytest test.py -v
+
+      - name: Check code with ruff
+        working-directory: .
+        run: ruff check .
